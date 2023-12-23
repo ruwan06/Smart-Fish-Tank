@@ -8,6 +8,94 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         ResizeMode="NoResize"
         Title="MainWindow" Height="593" Width="1014">
+    <Window.Resources>
+        <!--Background Color-->
+        <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#496FFF"/>
+        <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#FFFFFF"/>
+
+        <!--Primary Color-->
+        <SolidColorBrush x:Key="PrimaryBlueColor" Color="#263FAA"/>
+        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#64677A"/>
+
+        <!--Secundary Color-->
+        <SolidColorBrush x:Key="SecundaryBlueColor" Color="#496FFF"/>
+        <SolidColorBrush x:Key="SecundaryGrayColor" Color="#CECECE"/>
+
+        <!--Tertiary Color-->
+        <SolidColorBrush x:Key="TertiaryBlueColor" Color="#C2D1FC"/>
+
+        <!--Start: ToggleButtonStyle-->
+        <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="{DynamicResource SecundaryGrayColor}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryGrayColor}"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="MaxHeight" Value="20"/>
+            <Setter Property="MaxWidth" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="7"
+                                    Height="14"
+                                    Width="35"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                            <Ellipse x:Name="Ellipse"
+                                     Height="20"
+                                     Width="20"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     Fill="{DynamicResource SecundaryBackgroundColor}"
+                                     Stroke="{TemplateBinding BorderBrush}"
+                                     StrokeThickness="3"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!--Event Trigger Ckecked-->
+                            <EventTrigger RoutedEvent="Checked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="Border"
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="#C2D1FC" Duration="0:0:0.2"/>
+                                        <ThicknessAnimation Storyboard.TargetName="Ellipse"
+                                                            Storyboard.TargetProperty="Margin"
+                                                            To="15 0 0 0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <!--Event Trigger Unckecked-->
+                            <EventTrigger RoutedEvent="Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="Border"
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="#CECECE" Duration="0:0:0.2"/>
+                                        <ThicknessAnimation Storyboard.TargetName="Ellipse"
+                                                            Storyboard.TargetProperty="Margin"
+                                                            To="0 0 0 0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Ellipse"
+                                        Property="Fill" 
+                                        Value="{DynamicResource SecundaryBlueColor}"/>
+                                <Setter TargetName="Ellipse"
+                                        Property="Stroke" 
+                                        Value="{DynamicResource PrimaryBlueColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
     <Grid Margin="0,0,0,-6">
         <Image x:Name="image" HorizontalAlignment="Left" Height="307" Margin="143,0,0,0" VerticalAlignment="Center" Width="743" Source="/images/tank.png"/>
         <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="794,151,0,0" VerticalAlignment="Top" Width="100" Source="/images/valve.png"/>
@@ -18,6 +106,20 @@
         <Image x:Name="image3_Copy" HorizontalAlignment="Left" Height="53" Margin="374,374,0,0" VerticalAlignment="Top" Width="44" Source="/images/water filter.png"/>
         <Image x:Name="image4" HorizontalAlignment="Center" Height="47" Margin="0,42,0,0" VerticalAlignment="Top" Width="512" Source="/images/light.png"/>
         <Image x:Name="image5" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="/images/oxygen bubble.gif" HorizontalAlignment="Left" Height="241" Margin="215,205,0,0" VerticalAlignment="Top" Width="181" Source="/images/oxygen bubble.gif"/>
-
+        <CheckBox VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Style="{DynamicResource ToggleButtonStyle}" Margin="826,225,0,0"/>
+        <CheckBox VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Style="{DynamicResource ToggleButtonStyle}" Margin="826,331,0,0"/>
+        <CheckBox VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Style="{DynamicResource ToggleButtonStyle}" Margin="378,450,0,0"/>
+        <CheckBox VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Style="{DynamicResource ToggleButtonStyle}" Margin="294,450,0,0"/>
+        <CheckBox VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Style="{DynamicResource ToggleButtonStyle}" Margin="485,81,0,0"/>
     </Grid>
 </Window>
