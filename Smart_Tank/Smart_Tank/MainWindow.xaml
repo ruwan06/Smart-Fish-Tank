@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:Smart_Tank"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
@@ -96,30 +97,50 @@
         </Style>
 
     </Window.Resources>
-    <Grid Margin="0,0,0,-6">
-        <Image x:Name="image" HorizontalAlignment="Left" Height="307" Margin="143,0,0,0" VerticalAlignment="Center" Width="743" Source="/images/tank.png"/>
-        <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="794,151,0,0" VerticalAlignment="Top" Width="100" Source="/images/valve.png"/>
-        <Image x:Name="image1_Copy" HorizontalAlignment="Left" Height="100" Margin="794,351,0,0" VerticalAlignment="Top" Width="100" Source="/images/valve.png"/>
-        <Image x:Name="image2" HorizontalAlignment="Left" Height="9" Margin="810,189,0,0" VerticalAlignment="Top" Width="68" Source="/images/water in.png"/>
-        <Image x:Name="image2_Copy" HorizontalAlignment="Left" Height="9" Margin="810,389,0,0" VerticalAlignment="Top" Width="68" Source="/images/water out.png"/>
-        <Image x:Name="image3" HorizontalAlignment="Left" Height="40" Margin="291,375,0,0" VerticalAlignment="Top" Width="40" Source="/images/oxygen motor.png"/>
-        <Image x:Name="image3_Copy" HorizontalAlignment="Left" Height="53" Margin="374,374,0,0" VerticalAlignment="Top" Width="44" Source="/images/water filter.png"/>
-        <Image x:Name="image4" HorizontalAlignment="Center" Height="47" Margin="0,42,0,0" VerticalAlignment="Top" Width="512" Source="/images/light.png"/>
-        <Image x:Name="image5" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="/images/oxygen bubble.gif" HorizontalAlignment="Left" Height="241" Margin="215,205,0,0" VerticalAlignment="Top" Width="181" Source="/images/oxygen bubble.gif"/>
-        <CheckBox VerticalAlignment="Top"
-                  HorizontalAlignment="Left"
-                  Style="{DynamicResource ToggleButtonStyle}" Margin="826,225,0,0"/>
-        <CheckBox VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Style="{DynamicResource ToggleButtonStyle}" Margin="826,331,0,0"/>
-        <CheckBox VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Style="{DynamicResource ToggleButtonStyle}" Margin="378,450,0,0"/>
-        <CheckBox VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Style="{DynamicResource ToggleButtonStyle}" Margin="294,450,0,0"/>
-        <CheckBox VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Style="{DynamicResource ToggleButtonStyle}" Margin="485,81,0,0"/>
+    <Grid Margin="0,0,0,-6" Width="1014">
+        <Grid Height="462" Margin="143,0,120,79" VerticalAlignment="Bottom" Width="NaN">
+            <Border x:Name="bdrWaterLevel" BorderThickness="1" Grid.Row="0" CornerRadius="0,0,20,20" Background="#CAC3F4" Margin="58,0,91,81" Width="602" Height="50" VerticalAlignment="Bottom"/>
+
+            <Image x:Name="image" HorizontalAlignment="Left" Height="307" Margin="0,96,0,0" VerticalAlignment="Top" Width="743" Source="/images/tank.png"/>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="100" Margin="651,109,0,0" VerticalAlignment="Top" Width="100" Source="/images/valve.png"/>
+            <Image x:Name="image1_Copy" HorizontalAlignment="Left" Height="100" Margin="651,309,0,0" VerticalAlignment="Top" Width="100" Source="/images/valve.png"/>
+            <Image x:Name="imgWaterIn" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="/images/water In.gif" HorizontalAlignment="Left" Height="13" Margin="665,145,0,0" VerticalAlignment="Top" Width="76" Source="/images/water In.gif" Visibility="Collapsed"/>
+            <Image x:Name="image3" HorizontalAlignment="Left" Height="40" Margin="148,333,0,0" VerticalAlignment="Top" Width="40" Source="/images/oxygen motor.png"/>
+            <Image x:Name="image3_Copy" HorizontalAlignment="Left" Height="53" Margin="247,0,0,85" VerticalAlignment="Bottom" Width="44" Source="/images/water filter.png"/>
+            <Image x:Name="imgLight" HorizontalAlignment="Left" Height="47" Margin="108,0,0,0" VerticalAlignment="Top" Width="512" Source="/images/light.png"/>
+            <Image x:Name="imgOxygenBubble" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="/images/oxygen bubble.gif" HorizontalAlignment="Left" Height="241" Margin="72,163,0,0" VerticalAlignment="Top" Width="181" Source="/images/oxygen bubble.gif" Visibility="Collapsed"/>
+            <CheckBox x:Name="tglValveOut" VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource ToggleButtonStyle}" Margin="683,289,0,0" RenderTransformOrigin="0.543,0.69" Click="tglValveOut_Click"/>
+            <CheckBox x:Name="tglValveIn" VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource ToggleButtonStyle}" Margin="683,183,0,0" RenderTransformOrigin="1.266,0.185" Click="tglValveIn_Click"/>
+            <CheckBox x:Name="tglWaterFilter" VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource ToggleButtonStyle}" Margin="251,408,0,0" Click="tglWaterFilter_Click"/>
+            <CheckBox x:Name="tglOxygenMotor" VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource ToggleButtonStyle}" Margin="151,408,0,0" Click="tglOxygenMotor_Click"/>
+            <CheckBox x:Name="tglLight" VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource ToggleButtonStyle}" Margin="342,39,0,0" Click="tglLight_Click"/>
+            <Label x:Name="label" Content="Light" HorizontalAlignment="Left" Margin="341,56,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_Copy" Content="Water Filter" HorizontalAlignment="Left" Margin="234,436,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label x:Name="label_Copy1" Content="Oxygen Motor" HorizontalAlignment="Left" Margin="125,436,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Image x:Name="imgWaterOut" gif:ImageBehavior.RepeatBehavior="Forever" gif:ImageBehavior.AnimatedSource="/images/water Out.gif" HorizontalAlignment="Left" Height="13" Margin="665,345,0,0" VerticalAlignment="Top" Width="76" Source="/images/water Out.gif" Visibility="Collapsed"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="432,49,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="188"/>
+
+            
+            
+        </Grid>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="941,16,0,0" VerticalAlignment="Top" Height="43" Width="63" Click="button_Click_1"/>
+
+        <Grid Width="300" Height="150">
+            <lvc:CartesianChart Margin="10,-117,-10,117">
+                <lvc:CartesianChart.Series>
+                    <lvc:LineSeries Values="{Binding Values}" Stroke="Blue" />
+                </lvc:CartesianChart.Series>
+            </lvc:CartesianChart>
+        </Grid>
     </Grid>
 </Window>
